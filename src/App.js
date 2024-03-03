@@ -19,8 +19,7 @@ function WeatherApp() {
 
     setLoading(true);
     try {
-      const apiUrl = window?.configs?.apiUrl ? window.configs.apiUrl : "/";
-      const response = await fetch(`${apiUrl}/weather?city=${city}`);
+      const response = await fetch(`${config.apiUrl}/weather?city=${city}`);
       const data = await response.json();
 
       if (data.error) {
