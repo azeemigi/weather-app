@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { AuthProvider, useAuthContext } from "@asgardeo/auth-react";
 
-import { default as authConfig } from "/app/config/config.json";
+import { default as authConfig } from "./config.json";
 
 function WeatherApp() {
   const { state, signIn } = useAuthContext();
@@ -51,6 +51,7 @@ function WeatherApp() {
             onChange={(e) => setCity(e.target.value)}
           />
           <button onClick={getWeather}>Get Weather</button>
+          console.log(process.env.HOST_IP_ADDRESS);
           {loading && <div>Loading...</div>}
           {error && <div className="error">{error}</div>}
           {weather && !loading && !error && <div>{weather}</div>}
