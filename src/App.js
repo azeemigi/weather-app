@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import { AuthProvider, useAuthContext } from "@asgardeo/auth-react";
 
-import { default as authConfig } from "./config.json";
+import { default as authConfig } from "/app/config/config.json";
 
 function WeatherApp() {
   const { state, signIn } = useAuthContext();
