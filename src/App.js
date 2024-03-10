@@ -12,7 +12,7 @@ const authConfig = {
 };
 
 function WeatherApp() {
-  const { state, signIn, authState } = useAuthContext();
+  const { state, signIn, getAccessToken } = useAuthContext();
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState('');
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ function WeatherApp() {
     setLoading(true);
     try {
 
-      const token = authState?.token;
+      const token = await getAccessToken();
       if (!token) {
         setError('Authentication token not found');
         return;
