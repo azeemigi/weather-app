@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import { AuthProvider, useAuthContext } from "@asgardeo/auth-react";
 
-import { default as authConfig } from "./config.json";
+const authConfig = {
+  "clientID": window.config.clientID,
+  "baseUrl": window.config.baseUrl,
+  "signInRedirectURL": window.config.signInRedirectURL,
+  "signOutRedirectURL": window.config.signOutRedirectURL,
+  "scope": window.config.scope,
+  "apiUrl": window.config.apiUrl
+};
 
 function WeatherApp() {
   const { state, signIn, getAccessToken } = useAuthContext();
