@@ -14,7 +14,7 @@ const authConfig = {
 function WeatherApp() {
   const { state, signIn, getAccessToken } = useAuthContext();
   const [city, setCity] = useState('');
-  const [weather, setWeather] = useState('');
+  const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -26,7 +26,6 @@ function WeatherApp() {
 
     setLoading(true);
     try {
-
       const token = await getAccessToken();
       if (!token) {
         setError('Authentication token not found');
@@ -42,9 +41,9 @@ function WeatherApp() {
 
       if (data.error) {
         setError('City not found');
-        setWeather('');
+        setWeatherData(null);
       } else {
-        setWeather(data.weather);
+        setWeatherData(data);
         setError('');
       }
     } catch (error) {
@@ -71,7 +70,14 @@ function WeatherApp() {
           <button onClick={getWeather}>Get Weather</button>
           {loading && <div>Loading...</div>}
           {error && <div className="error">{error}</div>}
-          {weather && !loading && !error && <div>{weather}</div>}
+          {weatherData && !loading && !error && (
+            <div>
+              <h2>{weatherData.name}</h2>
+              <p>{weatherData.weather[0].description}</p>
+              <p>Temperature: {weatherData.main.temp} K</p>
+              <p>Humidity: {weatherData.main.humidity}%</p>
+            </div>
+          )}
         </>
       )}
     </div>
