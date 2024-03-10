@@ -12,7 +12,7 @@ const authConfig = {
 };
 
 function WeatherApp() {
-  const { state, signIn } = useAuthContext();
+  const { state, signI, authState } = useAuthContext();
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState('');
   const [loading, setLoading] = useState(false);
@@ -26,7 +26,18 @@ function WeatherApp() {
 
     setLoading(true);
     try {
-      const response = await fetch(`${authConfig.apiUrl}/weather?city=${city}`);
+
+      const token = authState?.token;
+      if (!token) {
+        setError('Authentication token not found');
+        return;
+      }
+
+      const response = await fetch(`${authConfig.apiUrl}/weather?city=${city}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
       const data = await response.json();
 
       if (data.error) {
