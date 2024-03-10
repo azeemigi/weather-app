@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import './App.css';
 import { AuthProvider, useAuthContext } from "@asgardeo/auth-react";
 
-import { default as authConfig } from "./config.json";
+const authConfig = {
+  "clientID": "pY0NnIUxpc5y9fbtnw9h6B7OsVUa",
+  "baseUrl": "https://api.asgardeo.io/t/qbitlabs",
+  "signInRedirectURL": "https://e7783938-532e-4a2c-99b2-1deba768f486.e1-us-east-azure.choreoapps.dev/",
+  "signOutRedirectURL": "https://e7783938-532e-4a2c-99b2-1deba768f486.e1-us-east-azure.choreoapps.dev/",
+  "scope": ["openid profile"],
+  "apiUrl": "/choreo-apis/ewyk/weather-api/endpoint-9090-803/v1.0"
+};
 
 function WeatherApp() {
   const { state, signIn } = useAuthContext();
@@ -51,7 +58,6 @@ function WeatherApp() {
             onChange={(e) => setCity(e.target.value)}
           />
           <button onClick={getWeather}>Get Weather</button>
-          console.log(process.env.HOST_IP_ADDRESS);
           {loading && <div>Loading...</div>}
           {error && <div className="error">{error}</div>}
           {weather && !loading && !error && <div>{weather}</div>}
