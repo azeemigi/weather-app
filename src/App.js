@@ -12,7 +12,7 @@ const authConfig = {
 };
 
 function WeatherApp() {
-  const { state, signI, authState } = useAuthContext();
+  const { state, signIn, authState } = useAuthContext();
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState('');
   const [loading, setLoading] = useState(false);
