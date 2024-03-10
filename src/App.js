@@ -39,7 +39,7 @@ function WeatherApp() {
       });
       const data = await response.json();
 
-      if (data.error) {
+      if (data.cod === "404" && data.message === "city not found") {
         setError('City not found');
         setWeatherData(null);
       } else {
